@@ -13,6 +13,7 @@ class Display {
       {'^', 'C'}
     };
     Vector2 size;
+    char* base;
     vector<vector<int>> grid;
     
     Display ();

@@ -22,8 +22,14 @@ Ball :: Ball (int x, int y, float radius) {
 }
 
 void Ball :: Draw (Display *display) {
-  for (int i = 0; i < display->size.y; i++) {
-    for (int j = 0; j < display->size.x; j++) {
+  Vector2 leftTop = this->position - radius;
+  Vector2 rightBot = this->position + radius;
+
+  for (int i = leftTop.y; i < rightBot.y; i++) {
+    for (int j = leftTop.x; j < rightBot.x; j++) {
+      if (i < 0 or i > display->size.y) continue;
+      if (j < 0 or j > display->size.x) continue;
+
       if (Vector2::DistanceSquared(position, Vector2(j, i)) <= radius * radius) {
         display->grid[i][j] = 1;
       }

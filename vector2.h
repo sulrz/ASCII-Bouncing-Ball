@@ -15,12 +15,26 @@ class Vector2 {
     
     static float DistanceSquared (Vector2 v1, Vector2 v2);
     static float Distance (Vector2 v1, Vector2 v2);
-    static Vector2 Add (Vector2 source, float addition);
-    static Vector2 Add (Vector2 source, Vector2 addition);
-    static Vector2 Subtract (Vector2 source, float subtractor);
-    static Vector2 Subtract (Vector2 source, Vector2 subtractor);
-    static Vector2 Multiply (Vector2 source, float multiplier);
-    static Vector2 Multiply (Vector2 source, Vector2 multiplier);
+
+    friend const Vector2 operator+ (const Vector2& left, const float& right);
+    friend const Vector2 operator- (const Vector2& left, const float& right);
+    friend const Vector2 operator* (const Vector2& left, const float& right);
+    friend const Vector2 operator/ (const Vector2& left, const float& right);
+
+    friend const Vector2 operator+ (const Vector2& left, const Vector2& right);
+    friend const Vector2 operator- (const Vector2& left, const Vector2& right);
+    friend const Vector2 operator* (const Vector2& left, const Vector2& right);
+    friend const Vector2 operator/ (const Vector2& left, const Vector2& right);
+
+    friend Vector2& operator+= (Vector2& left, const float& right);
+    friend Vector2& operator-= (Vector2& left, const float& right);
+    friend Vector2& operator*= (Vector2& left, const float& right);
+    friend Vector2& operator/= (Vector2& left, const float& right);
+
+    friend Vector2& operator+= (Vector2& left, const Vector2& right);
+    friend Vector2& operator-= (Vector2& left, const Vector2& right);
+    friend Vector2& operator*= (Vector2& left, const Vector2& right);
+    friend Vector2& operator/= (Vector2& left, const Vector2& right);
 };
 
 #endif

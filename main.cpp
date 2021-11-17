@@ -5,35 +5,34 @@
 #include "ball.h"
 using namespace std;
 
-int width = 100;
-int height = 60;
+const int screenWidth = 60;
+const int screenHeight = 50;
 
-int circleXpos = 0;
-int circleYpos = 10;
-int radius = 6;
+const int circleXpos = 5;
+const int circleYpos = 10;
+const int radius = 6;
 
-float initialXballVelocity = 1.3;
-float initialYballVelocity = 0.0;
+const float initialXVelocity = 3.0;
+const float initialYVelocity = 5.0;
 
 // positive x gravity pulls to the right
 // negative x gravity pulls to the left
-float xGravity = 0.0;
+const float xGravity = 0.0;
 
 // positive y gravity pulls to the down
 // negative y gravity pulls to the up
-float yGravity = 5.0;
+const float yGravity = 5.0;
 
-float lossOfEnergyPerCollision = 0.80;
+const float bounciness = 0.95;
 
-float FPS = 15.0;
-float deltaTime = 1 / FPS;
+const float FPS = 30.0;
+const float deltaTime = 1 / FPS;
 
 int main() {
   Ball ball (Vector2(circleXpos, circleYpos), radius);
-  Vector2 ballVelocity (initialXballVelocity, initialYballVelocity);
+  Vector2 ballVelocity (initialXVelocity, initialYVelocity);
   
-
-  Display display (width, height);
+  Display display (screenWidth, screenHeight);
 
   while (true) {
     
@@ -41,15 +40,33 @@ int main() {
     display.Show();
 
     Vector2 gravity (xGravity, yGravity);
-    gravity = Vector2::Multiply (gravity, deltaTime);
-    ballVelocity = Vector2::Add (ballVelocity, gravity);
-    // cout << ballVelocity.x << " " << ballVelocity.y << endl;
-    ball.position = Vector2::Add (ball.position, ballVelocity);
+    gravity *= deltaTime;
+    
+    ballVelocity += gravity;
+    ball.position += ballVelocity;
 
-    if (ball.position.y + ball.radius > height) {
-      ballVelocity.y *= -lossOfEnergyPerCollision;
-      ballVelocity.x *= lossOfEnergyPerCollision;
-      ball.position.y = height - ball.radius;
+    if (ball.position.y - ball.radius < 0) {
+      ballVelocity.x *= bounciness;
+      ballVelocity.y *= -bounciness;
+      ball.position.y = 0 + ball.radius;
+    }
+
+    if (ball.position.y + ball.radius > screenHeight) {
+      ballVelocity.x *= bounciness;
+      ballVelocity.y *= -bounciness;
+      ball.position.y = screenHeight - ball.radius;
+    }
+
+
+    if (ball.position.x + ball.radius > screenWidth) {
+      ballVelocity.x *= -bounciness;
+      ballVelocity.y *= bounciness;
+      ball.position.x = screenWidth - ball.radius;
+    }
+    else if (ball.position.x - ball.radius < 0) {
+      ballVelocity.x *= -bounciness;
+      ballVelocity.y *= bounciness;
+      ball.position.x = 0 + ball.radius;
     }
 
     this_thread::sleep_for(std::chrono::milliseconds((int)(deltaTime * 1000)));
