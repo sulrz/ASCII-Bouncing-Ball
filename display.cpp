@@ -14,8 +14,6 @@ Display :: Display () {
 
   vector<vector<int>> newGrid (64, vector<int>(32, 0));
   grid = newGrid;
-
-  // this->Clear();
 }
 
 Display :: Display (int width, int height) {
@@ -27,8 +25,6 @@ Display :: Display (int width, int height) {
 
   vector<vector<int>> newGrid (height, vector<int>(width, 0));
   grid = newGrid;
-
-  // this->Clear();
 }
 
 Display :: Display (Vector2 size) {
@@ -39,12 +35,11 @@ Display :: Display (Vector2 size) {
 
   vector<vector<int>> newGrid (size.y, vector<int>(size.x, 0));
   grid = newGrid;
-
-  // this->Clear();
 }
 
 void Display :: Clear () {
   printf ("\e[H");
+  // system("clear");
 
   for (int i = 0; i < size.y; i++) {
     for (int j = 0; j < size.x; j++) {
@@ -72,5 +67,6 @@ void Display :: Show () {
     fputc ('|', stdout);
     fputc ('\n', stdout);
   }
+
   fwrite (this->base, this->size.x + 2, 1, stdout);
 }

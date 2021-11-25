@@ -22,8 +22,8 @@ Ball :: Ball (int x, int y, float radius) {
 }
 
 void Ball :: Draw (Display *display) {
-  Vector2 leftTop = this->position - radius;
-  Vector2 rightBot = this->position + radius;
+  Vector2 leftTop = this->position - this->radius;
+  Vector2 rightBot = this->position + this->radius;
 
   for (int i = leftTop.y; i < rightBot.y; i++) {
     for (int j = leftTop.x; j < rightBot.x; j++) {

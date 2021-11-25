@@ -10,7 +10,7 @@ class Display {
   public:
     char chars[2][2] = {
       {' ', '_'},
-      {'^', 'C'}
+      {'^', '@'}
     };
     Vector2 size;
     char* base;
@@ -24,7 +24,6 @@ class Display {
 
     void Clear ();
     void Show ();
-
 };
 
 #endif
