@@ -1,5 +1,7 @@
 # ASCII-Bouncing-Ball
 
+**Written in C++**
+
 The ASCII Bouncing Ball in the console with physics
 
 You can download this repo and run it on your own machine.
